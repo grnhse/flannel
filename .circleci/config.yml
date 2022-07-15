@@ -1,0 +1,33 @@
+version: 2.1
+jobs:
+  build-flannel-image-and-push-if-tagged:
+    machine:
+      image: ubuntu-2204:2022.04.1
+    steps:
+      - checkout
+      - run:
+          name: Configure GCR Access
+          command: |
+            if [[ -n $CIRCLE_TAG ]]; then
+              gcloud auth activate-service-account --key-file <(echo "${GCLOUD_SA}")
+              gcloud auth configure-docker
+            fi
+      - run:
+          name: Build and Push if tag
+          command: |
+            if [[ -n $CIRCLE_TAG ]]; then
+              make REGISTRY=${IMAGE_NAME} clean docker-push
+            else
+              make REGISTRY=${IMAGE_NAME} clean image
+            fi
+workflows:
+  build:
+    jobs:
+      - build-flannel-image-and-push-if-tagged:
+          filters:
+            branches:
+              only:
+                - greenhouse-main
+            tags:
+              # Only build v0.0.0-gh0 type tags
+              only: /v[0-9]+\.[0-9]+\.[0-9]+-gh[0-9]+/
