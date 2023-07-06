@@ -6,6 +6,28 @@
 
 Flannel is a simple and easy way to configure a layer 3 network fabric designed for Kubernetes.
 
+## Greenhouse fork
+
+This fork is currently rebased on upstream version v0.16.3
+
+It should be updated when we update Tigera/Calico. You can find the updated Flannel version in the [Calico release notes](https://docs.tigera.io/archive/v3.25/release-notes). From there,
+open and merge a PR to rebase on your Flannel version, following the below example:
+
+```bash
+# On greenhouse-main
+git rebase v0.16.3
+git push --force-with-lease
+
+# On feature branch
+git add (after updating README with new upstream version)
+git commit
+git tag v0.16.3-gh1
+git push
+git push --tags
+```
+
+Now merge the PR in the Github UI
+
 ## How it works
 
 Flannel runs a small, single binary agent called `flanneld` on each host, and is responsible for allocating a subnet lease to each host out of a larger, preconfigured address space.
