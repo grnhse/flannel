@@ -14,19 +14,24 @@ It should be updated when we update Tigera/Calico. You can find the updated Flan
 open and merge a PR to rebase on your Flannel version, following the below example:
 
 ```bash
-# On greenhouse-main
+git checkout greenhouse-main
 git rebase v0.16.3
 git push --force-with-lease
 
-# On feature branch
+git checkout <feature-branch>
 git add (after updating README with new upstream version)
 git commit
-git tag v0.16.3-gh1
 git push
-git push --tags
 ```
 
 Now merge the PR in the Github UI
+
+```bash
+git checkout greenhouse-main
+git pull
+git tag v0.16.3-gh1
+git push --tags
+```
 
 ## How it works
 
