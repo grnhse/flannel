@@ -44,7 +44,7 @@ Packets are forwarded using one of several [backend mechanisms][backends] includ
 Platforms like Kubernetes assume that each container (pod) has a unique, routable IP inside the cluster.
 The advantage of this model is that it removes the port mapping complexities that come from sharing a single host IP.
 
-Flannel is responsible for providing a layer 3 IPv4 network between multiple nodes in a cluster. Flannel does not control how containers are networked to the host, only how the traffic is transported between hosts. However, flannel does provide a CNI plugin for Kubernetes and a guidance on integrating with Docker.
+Flannel is responsible for providing a layer 3 IPv4 network between multiple nodes in a cluster. Flannel does not control how containers are networked to the host, only how the traffic is transported between hosts. However, flannel does provide a CNI plugin for Kubernetes and guidance on integrating with Docker.
 
 Flannel is focused on networking. For network policy, other projects such as [Calico][calico] can be used.
 
